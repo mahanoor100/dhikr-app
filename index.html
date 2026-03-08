@@ -132,10 +132,7 @@
 
     <!-- Bismillah — words revealed one by one right-to-left -->
     <p class="splash-footer" id="bismillahFooter">
-      <span class="bism-word" data-delay="1500">الرَّحِيْمِ</span>
-      <span class="bism-word" data-delay="1100">الرَّحْمٰنِ</span>
-      <span class="bism-word" data-delay="700">اللهِ</span>
-      <span class="bism-word" data-delay="300">بِسْمِ</span>
+      <span style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#6B21A8; letter-spacing:2px;">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</span>
     </p>
   </div>
 
@@ -239,37 +236,5 @@
   </div>
 
   <script src="app.js"></script>
-  <script>
-    /* ── Bismillah word-by-word sparkle animation ── */
-    const bismWords = document.querySelectorAll('.bism-word');
-    const sparkleColors = ['#c084fc','#f9a8d4','#fde68a','#ffffff','#a78bfa'];
-
-    function burstSparkles(el) {
-      for (let i = 0; i < 8; i++) {
-        const s = document.createElement('span');
-        s.className = 'sparkle';
-        const angle = (i / 8) * 2 * Math.PI;
-        const dist  = 18 + Math.random() * 14;
-        s.style.setProperty('--sx', Math.cos(angle) * dist + 'px');
-        s.style.setProperty('--sy', Math.sin(angle) * dist + 'px');
-        s.style.background = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
-        s.style.left = '50%';
-        s.style.top  = '50%';
-        s.style.marginLeft = '-3px';
-        s.style.marginTop  = '-3px';
-        el.appendChild(s);
-        setTimeout(() => s.remove(), 700);
-      }
-    }
-
-    bismWords.forEach(word => {
-      const delay = parseInt(word.dataset.delay);
-      setTimeout(() => {
-        word.classList.add('reveal');
-        burstSparkles(word);
-        setTimeout(() => word.classList.add('shimmer'), 500);
-      }, delay);
-    });
-  </script>
 </body>
 </html>

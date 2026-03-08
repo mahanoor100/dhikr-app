@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dhikr-v1';
+const CACHE_NAME = 'dhikr-v2';
 const ASSETS = [
   './',
   './index.html',

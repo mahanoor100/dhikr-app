@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#3B0764" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Dhikr" />
+  <meta name="description" content="A beautiful dhikr counter app. Remember. Reflect. Be at peace." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.svg" />
+  <title>Dhikr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- SCREEN 1: SPLASH -->
+  <div id="splash-screen" class="screen active">
+    <div class="splash-bg">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+    <div class="splash-content">
+      <div class="logo-wrap">
+        <div class="logo-glow"></div>
+        <div class="logo-beads">
+          <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="bead-svg">
+            <circle cx="10" cy="20" r="5" fill="#C084FC" opacity="0.6"/>
+            <circle cx="30" cy="20" r="5" fill="#C084FC" opacity="0.7"/>
+            <circle cx="50" cy="20" r="5" fill="#C084FC" opacity="0.8"/>
+            <circle cx="70" cy="20" r="5" fill="#C084FC" opacity="0.9"/>
+            <circle cx="90" cy="20" r="5" fill="#C084FC"/>
+            <circle cx="110" cy="20" r="5" fill="#C084FC"/>
+            <line x1="5" y1="20" x2="115" y2="20" stroke="#C084FC" stroke-width="1.5" opacity="0.4"/>
+          </svg>
+        </div>
+        <h1 class="logo-title">Dhikr</h1>
+        <p class="logo-arabic">ذِكر</p>
+      </div>
+      <p class="tagline">Remember. Reflect. Be at peace.</p>
+      <button class="begin-btn" id="beginBtn">
+        <span>Begin</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+    <p class="splash-footer">بِسْمِ اللَّهِ</p>
+  </div>
+
+  <!-- SCREEN 2: COUNTER -->
+  <div id="counter-screen" class="screen">
+    <div class="counter-bg">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+    </div>
+
+    <div class="counter-layout">
+
+      <!-- Header -->
+      <div class="counter-header">
+        <button class="back-btn" id="backBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="session-info">
+          <span class="session-label">Session Total</span>
+          <span class="session-count" id="sessionTotal">0</span>
+        </div>
+      </div>
+
+      <!-- Dhikr Selector -->
+      <div class="dhikr-selector">
+        <button class="dhikr-nav" id="prevDhikr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="dhikr-name-wrap">
+          <p class="dhikr-arabic" id="dhikrArabic">سُبْحَانَ اللَّهِ</p>
+          <p class="dhikr-name" id="dhikrName">SubhanAllah</p>
+        </div>
+        <button class="dhikr-nav" id="nextDhikr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Main Counter Button -->
+      <div class="counter-wrap">
+        <div class="counter-rings">
+          <div class="ring ring1"></div>
+          <div class="ring ring2"></div>
+          <div class="ring ring3"></div>
+        </div>
+        <button class="counter-btn" id="counterBtn">
+          <span class="count-number" id="countDisplay">0</span>
+        </button>
+        <div class="ripple-container" id="rippleContainer"></div>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-section">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p class="progress-text" id="progressText">0 / 33</p>
+      </div>
+
+      <!-- Bottom Controls -->
+      <div class="bottom-controls">
+        <button class="target-btn" id="targetBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          <span>Target: <span id="targetLabel">33</span></span>
+        </button>
+        <button class="reset-btn" id="resetBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Target Modal -->
+    <div class="modal-overlay" id="targetModal">
+      <div class="modal">
+        <h3>Set Target</h3>
+        <div class="target-options">
+          <button class="target-opt" data-val="33">33</button>
+          <button class="target-opt" data-val="99">99</button>
+          <button class="target-opt" data-val="100">100</button>
+          <button class="target-opt" data-val="500">500</button>
+        </div>
+        <div class="custom-target">
+          <input type="number" id="customTarget" placeholder="Custom..." min="1" max="9999" />
+          <button id="setCustomTarget">Set</button>
+        </div>
+        <button class="modal-close" id="modalClose">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Celebration overlay -->
+    <div class="celebration" id="celebration">
+      <div class="celebration-text">
+        <p class="cel-arabic">مَاشَاءَ اللَّه</p>
+        <p class="cel-sub">MashaAllah! 🤍</p>
+      </div>
+      <canvas id="confettiCanvas"></canvas>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

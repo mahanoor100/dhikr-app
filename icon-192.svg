@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <rect width="192" height="192" rx="40" fill="#3B0764"/>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#3B0764" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="96" cy="96" r="80" fill="url(#glow)"/>
+  <!-- Bead string -->
+  <line x1="36" y1="76" x2="156" y2="76" stroke="#c084fc" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="46" cy="76" r="7" fill="#c084fc" opacity="0.6"/>
+  <circle cx="66" cy="76" r="7" fill="#c084fc" opacity="0.7"/>
+  <circle cx="86" cy="76" r="7" fill="#c084fc" opacity="0.8"/>
+  <circle cx="106" cy="76" r="7" fill="#c084fc" opacity="0.9"/>
+  <circle cx="126" cy="76" r="7" fill="#c084fc"/>
+  <circle cx="146" cy="76" r="7" fill="#c084fc"/>
+  <!-- Dhikr text -->
+  <text x="96" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="38" font-weight="300" fill="white" letter-spacing="6">Dhikr</text>
+</svg>

@@ -1,11 +1,59 @@
 // ===== DHIKR DATA =====
 const dhikrList = [
-  { name: "SubhanAllah", arabic: "سُبْحَانَ اللَّهِ" },
-  { name: "Alhamdulillah", arabic: "الْحَمْدُ لِلَّهِ" },
-  { name: "Allahu Akbar", arabic: "اللَّهُ أَكْبَرُ" },
-  { name: "La ilaha illallah", arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ" },
-  { name: "Astaghfirullah", arabic: "أَسْتَغْفِرُ اللَّهَ" },
-  { name: "SubhanAllahi wa bihamdihi", arabic: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ" },
+  {
+    label: "پہلا عشرہ — رحمت",
+    name: "Dua — 1st Ashra",
+    arabic: "رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ ",
+    urdu: "اے میرے رب! مجھے بخش دے اور مجھ پر رحم فرما، اور تو سب سے بہتر رحم کرنے والا ہے"
+  },
+  {
+    label: "دوسرا عشرہ — مغفرت",
+    name: "Dua — 2nd Ashra",
+    arabic: "أَسْتَغْفِرُ اللَّهَ رَبِّي مِنْ كُلِّ ذَنْبٍ وَأَتُوبُ إِلَيْهِ ",
+    urdu: "میں اللہ سے معافی مانگتا ہوں جو میرا رب ہے، اپنے ہر گناہ سے، اور میں اسی کی طرف رجوع کرتا ہوں"
+  },
+  {
+    label: "تیسرا عشرہ — جہنم سے نجات",
+    name: "Dua — 3rd Ashra",
+    arabic: "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+    urdu: "اے اللہ! بے شک تو بہت معاف کرنے والا ہے، معاف کرنے کو پسند کرتا ہے، پس تو مجھے معاف فرمادے"
+  },
+  {
+    label: "توبہ و استغفار",
+    name: "Tawbah",
+    arabic: "أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ",
+    urdu: "میں اللہ سے مغفرت مانگتا ہوں اور اس کی طرف رجوع کرتا ہوں"
+  },
+  {
+    label: "جامع دعا",
+    name: "Jami' Dua",
+    arabic: "اللَّهُمَّ اغْفِرْ لِي وَارْحَمْنِي وَعَافِنِي وَاهْدِنِي وَارْزُقْنِي",
+    urdu: "اے اللہ! مجھے بخش دے، مجھ پر رحم کر، مجھے عافیت دے، مجھے ہدایت دے اور مجھے رزق عطا فرما"
+  },
+  {
+    label: "دعائے یونس",
+    name: "Dua-e-Yunus",
+    arabic: "لَّا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ",
+    urdu: "تیرے سوا کوئی معبود نہیں، تو پاک ہے، بیشک میں ظالموں میں سے تھا"
+  },
+  {
+    label: "عافیت کی دعا",
+    name: "Dua for 'Afiyah",
+    arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ",
+    urdu: "اے اللہ! میں تجھ سے عافیت مانگتا ہوں"
+  },
+  {
+    label: "اللہ سے فریاد",
+    name: "Ya Hayyu Ya Qayyum",
+    arabic: "يَا حَيُّ يَا قَيُّوْمُ بِرَحْمَتِكَ أَسْتَغِيْث",
+    urdu: "اے زندہ! اے قائم رہنے والے! میں تیری رحمت کا سہارا مانگتا ہوں"
+  },
+  {
+    label: "توکل علی اللہ",
+    name: "Hasbiyallah",
+    arabic: "حَسْبِيَ اللهُ وَنِعْمَ الْوَكِيلُ",
+    urdu: "اللہ مجھے کافی ہے اور وہ بہترین کارساز ہے"
+  },
 ];
 
 // ===== STATE =====
@@ -122,8 +170,11 @@ function setDhikr(index) {
   void dhikrNameWrap.offsetWidth;
   dhikrNameWrap.classList.add('changing');
   setTimeout(() => {
-    dhikrNameEl.textContent = dhikrList[currentDhikrIndex].name;
-    dhikrArabicEl.textContent = dhikrList[currentDhikrIndex].arabic;
+    const d = dhikrList[currentDhikrIndex];
+    document.getElementById('dhikrLabel').textContent  = d.label  || '';
+    dhikrArabicEl.textContent = d.arabic;
+    document.getElementById('dhikrUrdu').textContent   = d.urdu   || '';
+    dhikrNameEl.textContent   = d.name;
   }, 120);
 }
 
@@ -244,8 +295,11 @@ function stopConfetti() {
 
 // ===== INIT =====
 updateDisplay();
-dhikrNameEl.textContent = dhikrList[0].name;
-dhikrArabicEl.textContent = dhikrList[0].arabic;
+const initDhikr = dhikrList[0];
+document.getElementById('dhikrLabel').textContent = initDhikr.label  || '';
+dhikrArabicEl.textContent = initDhikr.arabic;
+document.getElementById('dhikrUrdu').textContent  = initDhikr.urdu   || '';
+dhikrNameEl.textContent   = initDhikr.name;
 
 // ===== SERVICE WORKER =====
 if ('serviceWorker' in navigator) {

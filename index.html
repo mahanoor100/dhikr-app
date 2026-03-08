@@ -15,6 +15,87 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ── Bismillah footer ── */
+    .splash-footer {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      z-index: 2;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      direction: rtl;
+    }
+    .bism-word {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      letter-spacing: 2px;
+      opacity: 0;
+      position: relative;
+      display: inline-block;
+    }
+    .bism-word.reveal {
+      animation: bismReveal 0.7s cubic-bezier(0.34,1.4,0.64,1) forwards;
+    }
+    @keyframes bismReveal {
+      from { opacity: 0; transform: translateY(10px) scale(0.85); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .bism-word .sparkle {
+      position: absolute;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparklePop 0.7s ease forwards;
+    }
+    @keyframes sparklePop {
+      0%   { transform: translate(0,0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--sx), var(--sy)) scale(0); opacity: 0; }
+    }
+    .bism-word.shimmer {
+      background: linear-gradient(90deg, #6B21A8 0%, #c084fc 40%, #f9a8d4 60%, #6B21A8 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmerFlow 2.5s linear infinite;
+    }
+    @keyframes shimmerFlow {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* ── Dhikr card extras ── */
+    .dhikr-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #a855f7;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .dhikr-urdu {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 5px;
+      font-weight: 400;
+      direction: rtl;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .dhikr-name-wrap {
+      max-height: 130px;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .dhikr-name-wrap::-webkit-scrollbar { display: none; }
+  </style>
 </head>
 <body>
 
@@ -48,7 +129,14 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
-    <p class="splash-footer">بِسْمِ اللَّهِ</p>
+
+    <!-- Bismillah — words revealed one by one right-to-left -->
+    <p class="splash-footer" id="bismillahFooter">
+      <span class="bism-word" data-delay="1500">الرَّحِيْمِ</span>
+      <span class="bism-word" data-delay="1100">الرَّحْمٰنِ</span>
+      <span class="bism-word" data-delay="700">اللهِ</span>
+      <span class="bism-word" data-delay="300">بِسْمِ</span>
+    </p>
   </div>
 
   <!-- SCREEN 2: COUNTER -->
@@ -78,8 +166,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div class="dhikr-name-wrap">
-          <p class="dhikr-arabic" id="dhikrArabic">سُبْحَانَ اللَّهِ</p>
-          <p class="dhikr-name" id="dhikrName">SubhanAllah</p>
+          <span class="dhikr-label" id="dhikrLabel"></span>
+          <p class="dhikr-arabic" id="dhikrArabic"></p>
+          <p class="dhikr-urdu"   id="dhikrUrdu"></p>
+          <p class="dhikr-name"   id="dhikrName"></p>
         </div>
         <button class="dhikr-nav" id="nextDhikr">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
@@ -149,5 +239,37 @@
   </div>
 
   <script src="app.js"></script>
+  <script>
+    /* ── Bismillah word-by-word sparkle animation ── */
+    const bismWords = document.querySelectorAll('.bism-word');
+    const sparkleColors = ['#c084fc','#f9a8d4','#fde68a','#ffffff','#a78bfa'];
+
+    function burstSparkles(el) {
+      for (let i = 0; i < 8; i++) {
+        const s = document.createElement('span');
+        s.className = 'sparkle';
+        const angle = (i / 8) * 2 * Math.PI;
+        const dist  = 18 + Math.random() * 14;
+        s.style.setProperty('--sx', Math.cos(angle) * dist + 'px');
+        s.style.setProperty('--sy', Math.sin(angle) * dist + 'px');
+        s.style.background = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+        s.style.left = '50%';
+        s.style.top  = '50%';
+        s.style.marginLeft = '-3px';
+        s.style.marginTop  = '-3px';
+        el.appendChild(s);
+        setTimeout(() => s.remove(), 700);
+      }
+    }
+
+    bismWords.forEach(word => {
+      const delay = parseInt(word.dataset.delay);
+      setTimeout(() => {
+        word.classList.add('reveal');
+        burstSparkles(word);
+        setTimeout(() => word.classList.add('shimmer'), 500);
+      }, delay);
+    });
+  </script>
 </body>
 </html>

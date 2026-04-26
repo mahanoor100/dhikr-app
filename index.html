@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#3B0764" />
+  <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Dhikr" />
@@ -13,61 +13,128 @@
   <title>Dhikr</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Noto+Sans+Arabic:wght@400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    /* ── Bismillah footer ── */
-    .splash-footer {
+    /* ── SPLASH SCREEN — Figma design ── */
+    #splash-screen {
+      background: none;
+    }
+    .splash-bg-img {
       position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .splash-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.22);
+      z-index: 1;
+    }
+    .splash-content {
+      position: relative;
       z-index: 2;
       display: flex;
-      gap: 10px;
+      flex-direction: column;
       align-items: center;
-      direction: rtl;
+      justify-content: center;
+      height: 100%;
+      padding: 40px 24px;
+      gap: 0;
     }
-    .bism-word {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      letter-spacing: 2px;
-      opacity: 0;
-      position: relative;
-      display: inline-block;
-    }
-    .bism-word.reveal {
-      animation: bismReveal 0.7s cubic-bezier(0.34,1.4,0.64,1) forwards;
-    }
-    @keyframes bismReveal {
-      from { opacity: 0; transform: translateY(10px) scale(0.85); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .bism-word .sparkle {
+    /* decorative top ornament */
+    .splash-ornament {
       position: absolute;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: sparklePop 0.7s ease forwards;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      opacity: 0.8;
     }
-    @keyframes sparklePop {
-      0%   { transform: translate(0,0) scale(1); opacity: 1; }
-      100% { transform: translate(var(--sx), var(--sy)) scale(0); opacity: 0; }
+    /* glass card */
+    .splash-card {
+      background: rgba(255,255,255,0.04);
+      border: 0.1px solid rgba(255,255,255,0.6);
+      border-radius: 16px;
+      box-shadow: 0 0 70px 0 rgba(255,255,255,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 36px;
+      padding: 28px 20px;
+      width: 100%;
+      max-width: 360px;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
     }
-    .bism-word.shimmer {
-      background: linear-gradient(90deg, #6B21A8 0%, #c084fc 40%, #f9a8d4 60%, #6B21A8 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmerFlow 2.5s linear infinite;
+    .splash-title-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      text-align: center;
+      color: white;
+      width: 100%;
     }
-    @keyframes shimmerFlow {
-      0%   { background-position: 0% center; }
-      100% { background-position: 200% center; }
+    .logo-title {
+      font-family: 'Montaga', serif !important;
+      font-size: clamp(52px, 14vw, 88px);
+      font-weight: 400;
+      color: white !important;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin: 0;
+      animation: fadeUp 0.8s ease both;
+      animation-delay: 0.2s;
     }
+    .logo-arabic {
+      font-family: 'Montaga', 'Noto Sans Arabic', serif !important;
+      font-size: clamp(44px, 12vw, 88px);
+      color: white !important;
+      line-height: 1.1;
+      margin: 0;
+      animation: fadeUp 0.8s ease both;
+      animation-delay: 0.35s;
+      opacity: 0;
+    }
+    .tagline {
+      font-family: 'Montaga', serif;
+      font-size: clamp(16px, 4vw, 28px);
+      color: white;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+      margin: 0;
+      animation: fadeUp 0.8s ease both;
+      animation-delay: 0.5s;
+      opacity: 0;
+    }
+    .begin-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 28px;
+      padding: 14px 20px 14px 18px;
+      font-family: 'Montaga', serif;
+      font-size: 17px;
+      font-weight: 400;
+      cursor: pointer;
+      width: 140px;
+      justify-content: center;
+      letter-spacing: 0.3px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      animation: fadeUp 0.8s ease both;
+      animation-delay: 0.65s;
+      opacity: 0;
+    }
+    .begin-btn:active { transform: scale(0.95); opacity: 0.85; }
+    .begin-btn svg { width: 20px; height: 20px; stroke: white; flex-shrink: 0; }
 
     /* ── Dhikr card extras ── */
     .dhikr-label {
@@ -85,12 +152,11 @@
       margin-top: 5px;
       font-weight: 400;
       direction: rtl;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      line-height: 1.5;
+      font-family: 'Noto Sans Arabic', sans-serif;
+      line-height: 1.6;
     }
     .dhikr-name-wrap {
-      max-height: 130px;
+      max-height: 140px;
       overflow-y: auto;
       scrollbar-width: none;
     }
@@ -99,35 +165,39 @@
 </head>
 <body>
 
-  <!-- SCREEN 1: SPLASH -->
+  <!-- SCREEN 1: SPLASH — matches Figma design -->
   <div id="splash-screen" class="screen active">
-    <div class="splash-bg">
-      <div class="orb orb1"></div>
-      <div class="orb orb2"></div>
-      <div class="orb orb3"></div>
+
+    <!-- Makkah background image -->
+    <img
+      class="splash-bg-img"
+      src="https://www.figma.com/api/mcp/asset/7cfb4923-90dd-4cfa-a736-d3df21ea4864"
+      alt=""
+    />
+    <div class="splash-bg-overlay"></div>
+
+    <!-- Decorative top ornament from Figma -->
+    <div class="splash-ornament">
+      <img
+        src="https://www.figma.com/api/mcp/asset/fd6744d6-cdd1-4cd4-a30c-0a9d54eb1a8d"
+        alt=""
+        style="height:22px; opacity:0.8;"
+      />
     </div>
+
     <div class="splash-content">
-      <div class="logo-wrap">
-        <div class="logo-glow"></div>
-        <div class="logo-beads">
-          <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="bead-svg">
-            <circle cx="10" cy="20" r="5" fill="#C084FC" opacity="0.6"/>
-            <circle cx="30" cy="20" r="5" fill="#C084FC" opacity="0.7"/>
-            <circle cx="50" cy="20" r="5" fill="#C084FC" opacity="0.8"/>
-            <circle cx="70" cy="20" r="5" fill="#C084FC" opacity="0.9"/>
-            <circle cx="90" cy="20" r="5" fill="#C084FC"/>
-            <circle cx="110" cy="20" r="5" fill="#C084FC"/>
-            <line x1="5" y1="20" x2="115" y2="20" stroke="#C084FC" stroke-width="1.5" opacity="0.4"/>
-          </svg>
+      <!-- Glass card -->
+      <div class="splash-card">
+        <div class="splash-title-block">
+          <h1 class="logo-title">Dhikr</h1>
+          <p class="logo-arabic">ذِكر</p>
+          <p class="tagline">Remember. Reflect.<br>Be at peace.</p>
         </div>
-        <h1 class="logo-title">Dhikr</h1>
-        <p class="logo-arabic">ذِكر</p>
+        <button class="begin-btn" id="beginBtn">
+          <span>Begin</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
       </div>
-      <p class="tagline">Remember. Reflect. Be at peace.</p>
-      <button class="begin-btn" id="beginBtn">
-        <span>Begin</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
     </div>
   </div>
 

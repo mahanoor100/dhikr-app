@@ -115,12 +115,6 @@ html, body {
   50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
 }
 
-.logo-beads {
-  margin-bottom: 12px;
-  animation: fadeUp 0.8s ease both;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
 .bead-svg { width: 100px; }
 
 .logo-title {
